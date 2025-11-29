@@ -20,7 +20,7 @@ public class ChatService {
     private final EmbeddingRepository embeddingRepository;
 
     // Conversation history per user
-    private final Map<String, List<Message>> userSessions = new ConcurrentHashMap<>();
+    private final Map<String, List<Message>> userSessions;
 
     public ChatService(ChatClient.Builder builder,
                        EmbeddingService embeddingService,
@@ -28,6 +28,7 @@ public class ChatService {
         this.chatClient = builder.build();
         this.embeddingService = embeddingService;
         this.embeddingRepository = embeddingRepository;
+        this.userSessions = new ConcurrentHashMap<>();
     }
 
     /**
@@ -38,6 +39,9 @@ public class ChatService {
      * @return Assistant's reply
      */
     public ChatResponse chat(String userId, String question) {
+        if (userId == null || userId.isBlank()) {
+            throw new IllegalArgumentException("userId cannot be null or empty");
+        }
 
         // 1. Generate embedding for the user's question
         float[] questionEmbedding = embeddingService.getEmbeddingForText(question);
