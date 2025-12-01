@@ -1,8 +1,8 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, message, Upload } from "antd";
 import type { UploadFile } from "antd/es/upload/interface";
-import axios from "axios";
 import React, { useState } from "react";
+import { uploadFile } from "../../services/ajaxService";
 
 export const UploadFileButton: React.FC = () => {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -17,13 +17,7 @@ export const UploadFileButton: React.FC = () => {
     formData.append("file", fileList[0].originFileObj as File);
 
     try {
-      const response = await axios.post(
-        "/api/embeddings/upload-file",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        },
-      );
+      const response = await uploadFile(formData);
       message.success(response.data);
       setFileList([]);
     } catch (error) {

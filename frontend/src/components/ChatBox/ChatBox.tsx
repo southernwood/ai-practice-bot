@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useState } from "react";
+import { sendChat } from "../../services/ajaxService";
 import { ChatInput } from "./ChatInput";
 import { MessageList } from "./MessageList";
 
@@ -25,10 +25,10 @@ export const ChatBox: React.FC = () => {
     setMessages((prev) => [...prev, userMessage]);
     setIsSending(true);
     try {
-      const res = await axios.post(
-        "http://localhost:8080/api/chat?userId=Lisa",
-        { message: content, userId: 'testing'},
-      );
+      const res = await sendChat({
+        message: content,
+        userId: 'Testing'
+      })
       setIsSending(false);
       const botMessage: Message = {
         content: res.data.answer,
@@ -53,7 +53,7 @@ export const ChatBox: React.FC = () => {
   return (
     <div
       style={{
-        width: 400,
+        width: 450,
         height: 600,
         backgroundColor: "#1f1f1f",
         borderRadius: 12,

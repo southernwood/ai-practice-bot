@@ -1,7 +1,8 @@
-import axios from "axios";
+import axios, { type AxiosResponse } from "axios";
 import type { FeedbackPayload } from "../models/Feedback";
+import type { MessagePayload } from "../models/chat";
 
-const BASE_URL = "http://localhost:8080/api";
+const BASE_URL = `${import.meta.env.VITE_API_URL}/api`;
 
 export async function sendFeedback(payload: FeedbackPayload) {
   try {
@@ -14,4 +15,20 @@ export async function sendFeedback(payload: FeedbackPayload) {
     console.error("Feedback API failed:", error.response || error.message);
     return error;
   }
+}
+
+export const sendChat = (payload : MessagePayload) : Promise<AxiosResponse<any>> => {
+  return axios.post(`${BASE_URL}/chat`, payload, {
+    headers: { "Content-Type": "application/json" },
+  });
+}
+
+export const uploadFile = (formData: FormData) => {
+  return axios.post(
+    `${BASE_URL}/embeddings/upload-file`,
+    formData,
+    {
+      headers: { "Content-Type": "multipart/form-data" },
+    },
+  )
 }
