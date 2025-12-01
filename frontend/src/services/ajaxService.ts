@@ -4,6 +4,8 @@ import type { MessagePayload } from "../models/chat";
 
 const BASE_URL = `${import.meta.env.VITE_API_URL}/api`;
 
+console.log("base url", BASE_URL);
+
 export async function sendFeedback(payload: FeedbackPayload) {
   try {
     const res = await axios.post(`${BASE_URL}/feedback`, payload, {
