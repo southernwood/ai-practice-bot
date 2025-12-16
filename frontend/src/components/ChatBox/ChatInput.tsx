@@ -32,6 +32,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSend, isSending }) => {
     <div
       style={{
         display: "flex",
+        alignItems: "center",
         gap: 8,
         padding: 12,
         borderTop: "1px solid #333",
@@ -58,15 +59,15 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSend, isSending }) => {
       <Button
         type="primary"
         onClick={handleSend}
-        style={{
-          borderRadius: 20,
-          background: "linear-gradient(45deg, #4f9aff, #1f6fff)",
-          border: "none",
-          color: "#fff",
-          fontWeight: 600,
-          boxShadow: "0 2px 8px rgba(79,154,255,0.5)",
-          transition: "all 0.2s ease",
-        }}
+          style={{
+    borderRadius: 20,
+    background: "linear-gradient(45deg, #5D3587, #A367B1)",
+    border: "none",
+    color: "#f5f5f5",
+    fontWeight: 600,
+    boxShadow: "0 2px 8px rgba(57,36,103,0.5)",
+    transition: "all 0.2s ease",
+  }}
         disabled={isSending}
       >
         Send

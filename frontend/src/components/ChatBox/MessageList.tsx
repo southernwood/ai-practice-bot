@@ -13,7 +13,7 @@ export const MessageList: React.FC<MessageListProps> = ({
   isSending,
 }) => {
   const listRef = useRef<HTMLDivElement>(null);
-  console.log('message list', messages)
+  console.log("message list", messages);
   useEffect(() => {
     if (listRef.current) {
       listRef.current.scrollTo({

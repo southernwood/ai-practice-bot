@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { sendChat } from "../../services/ajaxService";
 import { ChatInput } from "./ChatInput";
 import { MessageList } from "./MessageList";
+import { Prompts } from "./Prompts";
 
-export type Message  = {
+export type Message = {
   content: string;
   sender: "user" | "bot";
   timestamp?: string;
   embeddingIds?: number[];
   question?: string;
-}
+};
 
 export const ChatBox: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -20,22 +21,22 @@ export const ChatBox: React.FC = () => {
       content,
       sender: "user",
       timestamp: new Date().toLocaleTimeString(),
-      question: content
+      question: content,
     };
     setMessages((prev) => [...prev, userMessage]);
     setIsSending(true);
     try {
       const res = await sendChat({
         message: content,
-        userId: 'Testing'
-      })
+        userId: "Testing",
+      });
       setIsSending(false);
       const botMessage: Message = {
         content: res.data.answer,
         sender: "bot",
         embeddingIds: res.data.embeddingIds,
         timestamp: new Date().toLocaleTimeString(),
-        question: res.data.question
+        question: res.data.question,
       };
       setMessages((prev) => [...prev, botMessage]);
     } catch (err) {
@@ -54,7 +55,7 @@ export const ChatBox: React.FC = () => {
     <div
       style={{
         width: 450,
-        height: 600,
+        height: "100%",
         backgroundColor: "#1f1f1f",
         borderRadius: 12,
         display: "flex",
@@ -64,6 +65,7 @@ export const ChatBox: React.FC = () => {
       }}
     >
       <MessageList messages={messages} isSending={isSending} />
+      <Prompts onClickPrompt={(p) => sendMessage(p)} />
       <ChatInput onSend={sendMessage} isSending={isSending} />
     </div>
   );

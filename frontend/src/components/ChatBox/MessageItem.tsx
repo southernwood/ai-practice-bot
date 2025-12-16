@@ -11,7 +11,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
   timestamp,
   message,
 }) => {
-  console.log("message", message)
+  console.log("message", message);
   const { sender, content, question, embeddingIds } = message;
   return (
     <motion.div

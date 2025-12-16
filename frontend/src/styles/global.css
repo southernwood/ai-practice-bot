@@ -11,6 +11,7 @@ html,
 body,
 #root {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
   font-family:
@@ -22,7 +23,14 @@ body,
       rgba(123, 92, 255, 0.06),
       transparent 10%
     ),
-    linear-gradient(180deg, var(--page-bg-start) 0%, var(--page-bg-end) 100%);
+    linear-gradient(
+      180deg,
+      #0a0a0a 0%,
+      #0c0c0e 25%,
+      #0f0f12 50%,
+      #0c0c0e 75%,
+      #0a0a0a 100%
+    );
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #e6eef8;
@@ -87,4 +95,56 @@ body,
 .ant-btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(123, 92, 255, 0.12);
+}
+
+/* global.css */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 6s ease-in-out infinite;
+}
+.ant-tooltip-inner {
+  background-color: rgba(60, 60, 60, 0.85) !important;
+  color: #e6eef8;
+  backdrop-filter: blur(6px);
+  border-radius: 8px;
+  padding: 6px 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.ant-tooltip-arrow {
+  color: rgba(60, 60, 60, 0.85) !important;
+  width: 12px;
+  height: 6px;
+}
+
+.ant-tooltip-placement-top .ant-tooltip-arrow::before,
+.ant-tooltip-placement-bottom .ant-tooltip-arrow::before,
+.ant-tooltip-placement-left .ant-tooltip-arrow::before,
+.ant-tooltip-placement-right .ant-tooltip-arrow::before {
+  background-color: rgba(60, 60, 60, 0.85) !important;
+  border-color: rgba(60, 60, 60, 0.85) !important;
 }
