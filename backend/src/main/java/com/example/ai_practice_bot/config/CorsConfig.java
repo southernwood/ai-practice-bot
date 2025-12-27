@@ -14,8 +14,10 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("http://localhost:5173") // React dev server
-                        .allowedOrigins("https://ai-practice-bot-production.up.railway.app")
+                        .allowedOriginPatterns(
+                                "http://localhost:*",
+                                "https://ai-practice-bot-production.up.railway.app"
+                        )// React dev server
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowCredentials(true);
             }

@@ -33,5 +33,10 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  brevo:
+    api-key: ${BREVO_API_KEY}
+    sender:
+      email: ${BREVO_SENDER_EMAIL}
+      name: ${BREVO_SENDER_NAME}
 server:
   port: 8080
